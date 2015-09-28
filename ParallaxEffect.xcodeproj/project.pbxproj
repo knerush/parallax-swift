@@ -14,6 +14,7 @@
 		4A217A851BB9909F00253C18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A217A831BB9909F00253C18 /* LaunchScreen.storyboard */; };
 		4A217A901BB9909F00253C18 /* ParallaxEffectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A217A8F1BB9909F00253C18 /* ParallaxEffectTests.swift */; };
 		4A217A9B1BB9909F00253C18 /* ParallaxEffectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A217A9A1BB9909F00253C18 /* ParallaxEffectUITests.swift */; };
+		4A217AA91BB9955600253C18 /* parrot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4A217AA81BB9955600253C18 /* parrot.jpg */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4A217A961BB9909F00253C18 /* ParallaxEffectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParallaxEffectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A217A9A1BB9909F00253C18 /* ParallaxEffectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxEffectUITests.swift; sourceTree = "<group>"; };
 		4A217A9C1BB9909F00253C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A217AA81BB9955600253C18 /* parrot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parrot.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		4A217A791BB9909F00253C18 /* ParallaxEffect */ = {
 			isa = PBXGroup;
 			children = (
+				4A217AA81BB9955600253C18 /* parrot.jpg */,
 				4A217A7A1BB9909F00253C18 /* AppDelegate.swift */,
 				4A217A7C1BB9909F00253C18 /* ViewController.swift */,
 				4A217A7E1BB9909F00253C18 /* Main.storyboard */,
@@ -228,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A217AA91BB9955600253C18 /* parrot.jpg in Resources */,
 				4A217A851BB9909F00253C18 /* LaunchScreen.storyboard in Resources */,
 				4A217A821BB9909F00253C18 /* Assets.xcassets in Resources */,
 				4A217A801BB9909F00253C18 /* Main.storyboard in Resources */,

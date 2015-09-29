@@ -66,10 +66,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         print(scrollView.contentOffset.y)
         let scrollOffset = -scrollView.contentOffset.y
-        if scrollOffset < 0 {
-            let zoomFactor = -scrollOffset/topImage.frame.size.height
-            topImageHeightConstraint.constant += zoomFactor
+        
+        //when drag down, zoom in the image
+        unowned let wSelf:ViewController = self
+        
+        if scrollOffset > 0 {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                wSelf.topImageHeightConstraint.constant = 250
+            })
         }
+    }
+    
+    func animateImage() {
+        
     }
     
 

@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var topImageTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topImage: UIImageView!
     
@@ -52,9 +54,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let scrollOffset = -scrollView.contentOffset.y * 0.5
-        let yPos = scrollOffset;
+        let alpha = 1.0 + scrollOffset/topImage.frame.size.height*2
+//        let yPos = scrollOffset;
+//        
+//        topImage.frame = CGRectMake(0, yPos, topImage.frame.size.width, topImage.frame.size.height);
+        topImageTopConstraint.constant = scrollOffset
+        topImage.alpha = alpha
         
-        topImage.frame = CGRectMake(0, yPos, topImage.frame.size.width, topImage.frame.size.height);
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print(scrollView.contentOffset.y)
+        let scrollOffset = -scrollView.contentOffset.y
+        if scrollOffset < 0 {
+            let zoomFactor = -scrollOffset/topImage.frame.size.height
+            topImageHeightConstraint.constant += zoomFactor
+        }
     }
     
 

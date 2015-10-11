@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     let kImageHeihgtConstraint: CGFloat    = 250.0
     let kImageVisibleHeihgt: CGFloat       = 200.0
+    let kMaxZoomFactor: CGFloat            = 2.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        
+
         return cell
     }
     
@@ -65,8 +66,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         //else on scroll down zoom in the image
-        let zoomScale = 1 + (abs (min (scrollView.contentOffset.y, 0)) / 320.0)
-        topImageHeightConstraint.constant = kImageHeihgtConstraint * zoomScale
+        let zoomScale = 1 + (abs (min (scrollView.contentOffset.y, 0)) / kImageHeihgtConstraint)
+        let zoom = min(zoomScale, kMaxZoomFactor)
+        topImageHeightConstraint.constant = kImageHeihgtConstraint * zoom
     }
     
 }

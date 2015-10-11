@@ -14,21 +14,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var topImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topImage: UIImageView!
-    
+
+    let kImageHeihgtConstraint: CGFloat    = 250.0
+    let kImageVisibleHeihgt: CGFloat       = 200.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+
         tableView.backgroundColor = UIColor.clearColor()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: - table delegate
+
+    //MARK: - table delegate -
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 30;
@@ -37,50 +37,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        
         return cell
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200.0
+        return kImageVisibleHeihgt
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 200));
+        let view = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, kImageVisibleHeihgt));
         view.backgroundColor = UIColor.clearColor()
         
         return view
     }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let scrollOffset = -scrollView.contentOffset.y * 0.5
-        let alpha = 1.0 + scrollOffset/topImage.frame.size.height*2
-//        let yPos = scrollOffset;
-//        
-//        topImage.frame = CGRectMake(0, yPos, topImage.frame.size.width, topImage.frame.size.height);
-        topImageTopConstraint.constant = scrollOffset
-        topImage.alpha = alpha
-        
-    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print(scrollView.contentOffset.y)
-        let scrollOffset = -scrollView.contentOffset.y
-        
-        //when drag down, zoom in the image
-        unowned let wSelf:ViewController = self
-        
-        if scrollOffset > 0 {
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                wSelf.topImageHeightConstraint.constant = 250
-            })
-        }
-    }
-    
-    func animateImage() {
-        
-    }
-    
 
+
+    //MARK: - scroll view delegate -
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //dim image and move up 0.5 times slowlier when scrolled up
+        let scrollOffset = -scrollView.contentOffset.y * 0.5
+        let alpha = 1.0 + scrollOffset / topImage.frame.size.height * 2
+
+        if scrollOffset < 0 {
+            topImageTopConstraint.constant = scrollOffset
+            topImage.alpha = alpha
+        }
+
+        //else on scroll down zoom in the image
+        let zoomScale = 1 + (abs (min (scrollView.contentOffset.y, 0)) / 320.0)
+        topImageHeightConstraint.constant = kImageHeihgtConstraint * zoomScale
+    }
+    
 }
 
